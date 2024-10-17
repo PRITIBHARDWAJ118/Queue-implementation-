@@ -1,6 +1,8 @@
 # Queue-implementation-
 ## Aim:
-To study and implement queue using arrays.
+To study and implement Queue implementation using array.
+ menu options - i) Insert ii) Delete iii) Display iv) exit
+
 ## Theory:
 A queue is a linear data structure that follows the First In, First Out (FIFO) principle, meaning that the first element added is the first one to be removed.
 
@@ -17,3 +19,127 @@ A queue is a linear data structure that follows the First In, First Out (FIFO) p
     - Initially, both front and rear are set to -1.
     - As elements are enqueued, rear is incremented.
     - As elements are dequeued, front is incremented.
+
+![image](https://github.com/user-attachments/assets/d7554e1d-9187-483a-ae80-6d71f7f2954e)
+
+
+
+* Circular Queue:
+To optimize space in an array-based queue, the circular queue concept is often implemented, where the rear pointer wraps around to the front of the array once it reaches the end. This avoids unused spaces that occur in the standard queue when elements are dequeued.
+
+![image](https://github.com/user-attachments/assets/e715d118-3850-4061-bd36-c62320860e1d)
+
+
+### Program:
+
+#### Algorithm:
+1. **Define Class Queue**:
+    - Attributes: `rear` (tracks the rear of the queue), `front` (tracks the front of the queue), and `ar[]` (array to store queue elements).
+    - Initialize `rear` and `front` to `-1` (empty queue) and set `ar[0]` to 0 in the constructor.
+
+2. **Enqueue Operation**:
+    - Check if `rear` has reached the maximum size (`size+1`), indicating that the queue is full.
+    - If full, print "Queue is full."
+    - If empty (`front == -1`), set both `front` and `rear` to 0, then insert the element at `ar[0]`.
+    - Otherwise, increment `rear` and insert the element at `ar[rear]`.
+
+3. **Dequeue Operation**:
+    - Check if the queue is empty (`front == -1` or `front == rear + 1`).
+    - If empty, print "Queue is empty" and return `ERROR`.
+    - Otherwise, return the element at `ar[front]` and increment `front`.
+
+4. **Display (disp) Operation**:
+    - Check if the queue is empty (`front == -1` or `front == rear + 1`).
+    - If empty, print "Queue is empty."
+    - Otherwise, traverse the queue from `front` to `rear` and print each element.
+
+5. **Main Function**:
+    - Create an object of the `Queue` class.
+    - Enqueue elements (4, 8, and 3) into the queue.
+    - Display the queue elements using `disp()`.
+    - Dequeue the front element and display it.
+    - Display the remaining elements in the queue.
+
+#### Code:
+```
+//Priti
+//23070123103
+#include<iostream>
+using namespace std;
+#define size 5
+#define ERROR -9999
+class Queue
+{
+    int rear,front,ar[size];
+    public:
+    Queue()
+    {
+        rear=-1;
+        front=-1;
+        ar[0]=0;
+    }
+    void enqueue(int);
+    int dequeue();
+    void disp();
+};
+void Queue::enqueue(int num)
+{
+    if(rear==(size+1))
+    {
+        cout<<"Queue is full"<<endl;
+    }
+    else{
+        if(front==-1)
+        {
+            ar[++front]=num;
+            rear++;
+        }
+        else{
+            ar[++rear]=num;
+        }
+    }
+}
+int Queue::dequeue()
+{
+    if(front==-1 || front==(rear+1)){
+        cout<<"Queue is empty"<<endl;
+        return ERROR;
+    }
+    else {
+        int val=ar[front++];
+        return val;
+    }
+}
+void Queue::disp(){
+    if(front==-1 || front==(rear+1)){
+        cout<<"Queue is empty"<<endl;
+    }
+    else{
+        int i= front;
+        while(i!=(rear+1)){
+            cout<<ar[i];
+            i++;
+        }
+    }
+}
+int main()
+{
+    Queue q1;
+    q1.enqueue(4);
+     q1.enqueue(8);
+      q1.enqueue(3);
+      q1.disp();
+      int val= q1.dequeue();
+      cout<<endl<<"Deleted element: "<<val<<endl;
+      q1.disp();
+}
+```
+
+#### Output:
+![image](https://github.com/user-attachments/assets/f8db9ffb-31e0-4e59-8b9d-31e7b8f65861)
+
+## Conclusion:
+
+We learnt about Stack and it's implementation using arrays in C++.
+
+
